@@ -2,9 +2,9 @@
 import torch
 from torch import nn
 from scripts.ntm import NTM
-from scripts.controller import LSTMController
-from scripts.head import NTMReadHead, NTMWriteHead
-from scripts.memory import NTMMemory
+from .controller import LSTMController
+from .head import NTMReadHead, NTMWriteHead
+from .memory import NTMMemory
 
 
 class EncapsulatedNTM(nn.Module):
