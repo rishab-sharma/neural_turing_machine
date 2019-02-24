@@ -1,7 +1,7 @@
 """All in one NTM. Encapsulation of all components."""
 import torch
 from torch import nn
-from scripts.ntm import NTM
+from .ntm import NTM
 from .controller import LSTMController
 from .head import NTMReadHead, NTMWriteHead
 from .memory import NTMMemory
