@@ -1,10 +1,10 @@
 """All in one NTM. Encapsulation of all components."""
 import torch
 from torch import nn
-from .ntm import NTM
-from .controller import LSTMController
-from .head import NTMReadHead, NTMWriteHead
-from .memory import NTMMemory
+from scripts.ntm import NTM
+from scripts.controller import LSTMController
+from scripts.head import NTMReadHead, NTMWriteHead
+from scripts.memory import NTMMemory
 
 
 class EncapsulatedNTM(nn.Module):
