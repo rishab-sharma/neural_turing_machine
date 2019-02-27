@@ -1,23 +1,32 @@
 import torch
 from torch import nn
 from torch.nn import Parameter
-class Controller_SineWave(nn.Module):
+
+class LSTM_Model(nn.Module):
     def __init__(self):
-        super(Controller_SineWave, self).__init__()
+        super(LSTM_Model, self).__init__()
+        self.lstm1 = nn.LSTMCell(1, 51)
+        self.lstm2 = nn.LSTMCell(51, 51)
+        self.linear = nn.Linear(51, 1)
 
-        self.inp_dims = inp_dims
-        self.num_hidden_cells = num_hidden_cells
-        self.num_hidden_layer = self.num_hidden_layer
+    def forward(self, input, future=0):
+        outputs = []
+        h_t = torch.zeros(input.size(0), 51, dtype=torch.double)
+        c_t = torch.zeros(input.size(0), 51, dtype=torch.double)
+        h_t2 = torch.zeros(input.size(0), 51, dtype=torch.double)
+        c_t2 = torch.zeros(input.size(0), 51, dtype=torch.double)
 
-        self.LSTM = nn.LSTM(input_size=inp_dims,
-                            hidden_size=num_hidden_cells,
-                            num_layers=num_hidden_layers)
+        for i, input_t in enumerate(input.chunk(input.size(1), dim=1)):
+            h_t, c_t = self.lstm1(input_t, (h_t, c_t))
+            h_t2, c_t2 = self.lstm2(h_t, (h_t2, c_t2))
+            output = self.linear(h_t2)
+            outputs += [output]
 
-        self.h_bias = Parameter(torch.randn(self.num_hidden_layer, 1, self.num_hidden_cells) * 0.05)
+        for i in range(future):  # if we should predict the future
+            h_t, c_t = self.lstm1(output, (h_t, c_t))
+            h_t2, c_t2 = self.lstm2(h_t, (h_t2, c_t2))
+            output = self.linear(h_t2)
+            outputs += [output]
 
-
-
-
-
-
-
+        outputs = torch.stack(outputs, 1).squeeze(2)
+        return outputs
