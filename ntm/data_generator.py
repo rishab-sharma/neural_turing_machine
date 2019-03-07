@@ -9,8 +9,8 @@ torch.manual_seed(0)
 class datagen():
 
     def __init__(self, length = 1000, num_samples = 100):
-        length = self.length
-        num_samples = self.num_samples
+        self.length = length
+        self.num_samples = num_samples
 
     def sine_2(self, X, signal_freq=60.):
         return (np.sin(2 * np.pi * (X) / signal_freq) + np.sin(4 * np.pi * (X) / signal_freq)) / 2.0
