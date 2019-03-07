@@ -19,7 +19,7 @@ class datagen():
         noise = np.random.uniform(noise_range[0], noise_range[1], size=Y.shape)
         return Y + noise
 
-    def noisy_sine():
+    def noisy_sine(self):
         x = []
         for i in range(self.num_samples):
             random_offset = random.randint(0, self.length)
@@ -34,9 +34,9 @@ class datagen():
             os.mkdir('./data')
         torch.save(data, open(cwd+'/traindata_noisy.pt', 'wb'))
         print("Training Data saved in {}/traindata_noisy.pt".format(cwd))
-        return x
+        return data
 
-    def plane_sine():
+    def plane_sine(self):
         np.random.seed(2)
         T = 20
         x = np.empty((self.num_samples, self.length), 'int64')
@@ -47,4 +47,4 @@ class datagen():
         cwd = os.getcwd()
         torch.save(data, open(cwd+'traindata_plain.pt', 'wb'))
         print("Training Data saved in {}/traindata_plain.pt".format(cwd))
-        return x
+        return data
