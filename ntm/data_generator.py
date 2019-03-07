@@ -8,7 +8,7 @@ torch.manual_seed(0)
 
 class datagen():
 
-    def __init__(self, length = 1000, num_samples = 100):
+    def __init__(self, length=1000, num_samples=100):
         self.length = length
         self.num_samples = num_samples
 
@@ -24,8 +24,8 @@ class datagen():
         for i in range(self.num_samples):
             random_offset = random.randint(0, self.length)
             X = np.arange(self.length)
-            s = sine_2(X + random_offset)
-            Y = noisy(s)
+            s = self.sine_2(X + random_offset)
+            Y = self.noisy(s)
             x.append(sample(self.length))
         x = np.array(x)
         data = x.astype('float64')
