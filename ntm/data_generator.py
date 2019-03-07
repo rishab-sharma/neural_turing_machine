@@ -40,7 +40,7 @@ class datagen():
         np.random.seed(2)
         T = 20
         x = np.empty((self.num_samples, self.length), 'int64')
-        x[:] = np.array(range(self.length)) + np.random.randint(-4 * T, 4 * T, N).reshape(N, 1)
+        x[:] = np.array(range(self.length)) + np.random.randint(-4 * T, 4 * T, self.num_samples).reshape(self.num_samples, 1)
         data = np.sin(x / 1.0 / T).astype('float64')
         if not os.path.exists('./data'):
             os.mkdir('./data')
