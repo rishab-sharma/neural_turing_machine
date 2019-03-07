@@ -8,7 +8,7 @@ torch.manual_seed(0)
 
 class datagen():
 
-    def __init__(self, length=1000, num_samples=100):
+    def __init__(self, length, num_samples):
         self.length = length
         self.num_samples = num_samples
 
