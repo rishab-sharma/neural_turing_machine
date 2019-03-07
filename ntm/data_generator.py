@@ -19,7 +19,7 @@ class datagen():
         noise = np.random.uniform(noise_range[0], noise_range[1], size=Y.shape)
         return Y + noise
 
-    def noisy_sine(self):
+    def noisy_sine():
         x = []
         for i in range(self.num_samples):
             random_offset = random.randint(0, self.length)
@@ -36,7 +36,7 @@ class datagen():
         print("Training Data saved in {}/traindata_noisy.pt".format(cwd))
         return x
 
-    def plane_sine(self):
+    def plane_sine():
         np.random.seed(2)
         T = 20
         x = np.empty((self.num_samples, self.length), 'int64')
