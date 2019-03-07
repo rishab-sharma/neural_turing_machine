@@ -26,7 +26,7 @@ class datagen():
             X = np.arange(self.length)
             s = self.sine_2(X + random_offset)
             Y = self.noisy(s)
-            x.append(sample(self.length))
+            x.append(Y)
         x = np.array(x)
         data = x.astype('float64')
         cwd = os.getcwd()
